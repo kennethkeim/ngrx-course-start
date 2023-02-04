@@ -21,7 +21,7 @@ import { RouterState, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { EffectsModule } from "@ngrx/effects";
 import { EntityDataModule } from "@ngrx/data";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { reducers, routerFeatureKey } from "./reducers";
+import { metaReducers, reducers, routerFeatureKey } from "./reducers";
 import { AuthGuard } from "./auth.guard";
 
 const routes: Routes = [
@@ -52,6 +52,7 @@ const routes: Routes = [
     MatToolbarModule,
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, {
+      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
