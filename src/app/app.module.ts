@@ -22,12 +22,14 @@ import { EffectsModule } from "@ngrx/effects";
 import { EntityDataModule } from "@ngrx/data";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { reducers } from "./reducers";
+import { AuthGuard } from "./auth.guard";
 
 const routes: Routes = [
   {
     path: "courses",
     loadChildren: () =>
       import("./courses/courses.module").then((m) => m.CoursesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: "**",
