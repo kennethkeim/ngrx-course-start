@@ -12,6 +12,8 @@ import { User } from "../model/user.model";
 
 export const authFeatureKey = "auth";
 
+export const userLSKey = "user";
+
 export interface AuthState {
   user: User;
 }
