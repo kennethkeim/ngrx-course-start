@@ -9,6 +9,7 @@ import {
   NavigationStart,
   Router,
 } from "@angular/router";
+import { logout } from "./auth/auth.action";
 
 @Component({
   selector: "app-root",
@@ -18,7 +19,7 @@ import {
 export class AppComponent implements OnInit {
   loading = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -41,5 +42,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  logout() {}
+  logout() {
+    this.store.dispatch(logout());
+  }
 }
