@@ -8,6 +8,6 @@ import {
 
 export const authFeatureKey = "auth";
 
-export interface State {}
+export interface AuthState {}
 
-export const reducers: ActionReducerMap<State> = {};
+export const reducers: ActionReducerMap<AuthState> = {};
