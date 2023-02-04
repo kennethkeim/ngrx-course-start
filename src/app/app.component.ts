@@ -10,6 +10,7 @@ import {
   Router,
 } from "@angular/router";
 import { logout } from "./auth/auth.action";
+import { isLoggedIn, isLoggedOut } from "./auth/auth.selectors";
 
 @Component({
   selector: "app-root",
@@ -18,6 +19,8 @@ import { logout } from "./auth/auth.action";
 })
 export class AppComponent implements OnInit {
   loading = true;
+  isLoggedIn$ = this.store.pipe(select(isLoggedIn));
+  isLoggedOut$ = this.store.pipe(select(isLoggedOut));
 
   constructor(private router: Router, private store: Store) {}
 
