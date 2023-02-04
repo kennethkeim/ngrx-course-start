@@ -29,11 +29,17 @@ import {
 import { compareCourses, Course } from "./model/course";
 
 import { compareLessons, Lesson } from "./model/lesson";
+import { CoursesResolver } from "./shared/courses.resolver";
+import { EffectsModule } from "@ngrx/effects";
+import { CourseEffects } from "./shared/courses.effects";
 
 export const coursesRoutes: Routes = [
   {
     path: "",
     component: HomeComponent,
+    resolve: {
+      courses: CoursesResolver,
+    },
   },
   {
     path: ":courseUrl",
@@ -60,6 +66,7 @@ export const coursesRoutes: Routes = [
     MatMomentDateModule,
     ReactiveFormsModule,
     RouterModule.forChild(coursesRoutes),
+    EffectsModule.forFeature([CourseEffects]),
   ],
   declarations: [
     HomeComponent,
@@ -74,7 +81,7 @@ export const coursesRoutes: Routes = [
     CourseComponent,
   ],
   entryComponents: [EditCourseDialogComponent],
-  providers: [CoursesHttpService],
+  providers: [CoursesHttpService, CoursesResolver],
 })
 export class CoursesModule {
   constructor() {}
