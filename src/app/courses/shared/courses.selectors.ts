@@ -9,6 +9,7 @@ export const selectCoursesState =
 
 export const selectAllCourses = createSelector(
   selectCoursesState,
+  // #courses-selector-hotfix
   (data): Course[] => {
     const realData = data["0"] as fromCourses.CoursesState;
     return Object.keys(realData.entities).map((key) => realData.entities[key]);
@@ -28,4 +29,13 @@ export const selectAdvancedCourses = createSelector(
 export const selectPromoTotal = createSelector(
   selectAllCourses,
   (courses) => courses.filter((course) => course.promo).length
+);
+
+export const areCoursesLoaded = createSelector(
+  selectCoursesState,
+  // #courses-selector-hotfix
+  (state) => {
+    const realState = state["0"] as fromCourses.CoursesState;
+    return realState.allCoursesLoaded;
+  }
 );
