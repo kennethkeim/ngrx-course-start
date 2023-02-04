@@ -9,8 +9,10 @@ import {
   NavigationStart,
   Router,
 } from "@angular/router";
-import { logout } from "./auth/auth.action";
+import { login, logout } from "./auth/auth.action";
 import { isLoggedIn, isLoggedOut } from "./auth/auth.selectors";
+import { userLSKey } from "./auth/reducers";
+import { User } from "./auth/model/user.model";
 
 @Component({
   selector: "app-root",
@@ -25,6 +27,12 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private store: Store) {}
 
   ngOnInit() {
+    const userString = localStorage.getItem(userLSKey);
+    if (userString) {
+      const user = JSON.parse(userString) as User;
+      this.store.dispatch(login({ user }));
+    }
+
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {
